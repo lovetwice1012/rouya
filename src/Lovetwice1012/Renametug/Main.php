@@ -9,10 +9,11 @@ use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
 use pocketmine\utils\Config;
+use pocketmine\math\Vector3;
 
 class Main extends PluginBase implements Listener{
 
-	private $fly;
+	
 	public $myConfig;
 		       
 	public function onEnable(){
@@ -24,11 +25,12 @@ class Main extends PluginBase implements Listener{
 
 	public function onJoin(PlayerJoinEvent $event){
 		$config = $this->myConfig;
+		$pos = new Vector3(256, 4, 263);
   $player = $event->getPlayer();
   /** @var Config $config */
-  if($config->exists($player->getName())){
-	  $player->setNameTag($config->get($player->getName()));
-	  $player->setDisplayName($config->get($player->getName()));
+  if($config->exists($player->getName())&&$config->get($player->getName())==true){
+	$player->setImmobile();
+	 $player->teleport(Vector3 $pos, float $yaw = null, float $pitch = null);
   }		
 	}
 
@@ -38,22 +40,23 @@ class Main extends PluginBase implements Listener{
         if ($label === "atama") {
             if ($sender->isOp()) {
 		if(isset($args[0])){
-		if(isset($args[1])){    
+		if($config->get($player->getName())==false){
+			$pos = new Vector3(256, 4, 263);
 			$player = $this->getServer()->getPlayer($args[0]);
-                    $tag = $args[1]; 
-		    $config->set($player->getName(), "[§d".$tag."§r]".$player->getName());
+$player->setImmobile();
+	 $player->teleport(Vector3 $pos, float $yaw = null, float $pitch = null);
+		    $config->set($player->getName(),true);
 		    $config->save();
-		    $player->setNameTag("[§d".$tag."§r]".$player->getName());
-		    $player->setDisplayName("[§d".$tag."§r]".$player->getName());
+		    
+	    	    $sender->sendMessage("牢屋にぶち込みました。");
 		}else{
-			$player = $this->getServer()->getPlayer($args[0]);
-			$config->set($player->getName(),$player->getName());
-			$config->save();
-               
-                $player->setNameTag($player->getName());
-                $player->setDisplayName($player->getName());
+			$pos = new Vector3(255, 4, 255);
+		$config->set($player->getName(),false);
+			$player->setImmobile(false);
+	 $player->teleport(Vector3 $pos, float $yaw = null, float $pitch = null);
+		    $config->save();	
+			$sender->sendMessage("牢屋から出しました。");
 		}
-	    	    $sender->sendMessage("頭の上の名前表示が".$config->get($player->getName())."になりました");
 		}else{
 	
 		    $sender->sendMessage("§c使用方法:/atama 変更したい人の名前　変更後の名前");
