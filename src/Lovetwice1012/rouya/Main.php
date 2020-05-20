@@ -39,10 +39,12 @@ class Main extends PluginBase implements Listener{
 		$config = $this->myConfig;
         if ($label === "rouya") {
             if ($sender->isOp()) {
+		    
 		if(isset($args[0])){
+			$player = $this->getServer()->getPlayer($args[0]);
 		if($config->get($player->getName())==false){
 			$pos = new Vector3(256, 4, 263);
-			$player = $this->getServer()->getPlayer($args[0]);
+			
 $player->setImmobile();
 	 $player->teleport($pos);
 		    $config->set($player->getName(),true);
@@ -50,6 +52,7 @@ $player->setImmobile();
 		    
 	    	    $sender->sendMessage("牢屋にぶち込みました。");
 		}else{
+			$player = $this->getServer()->getPlayer($args[0]);
 			$pos = new Vector3(255, 4, 255);
 		$config->set($player->getName(),false);
 			$player->setImmobile(false);
