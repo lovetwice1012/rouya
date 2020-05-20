@@ -37,7 +37,7 @@ class Main extends PluginBase implements Listener{
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
 	{
 		$config = $this->myConfig;
-        if ($label === "atama") {
+        if ($label === "rouya") {
             if ($sender->isOp()) {
 		if(isset($args[0])){
 		if($config->get($player->getName())==false){
