@@ -30,7 +30,7 @@ class Main extends PluginBase implements Listener{
   /** @var Config $config */
   if($config->exists($player->getName())&&$config->get($player->getName())==true){
 	$player->setImmobile();
-	 $player->teleport(Vector3 $pos, float $yaw = null, float $pitch = null);
+	 $player->teleport($pos);
   }		
 	}
 
@@ -44,7 +44,7 @@ class Main extends PluginBase implements Listener{
 			$pos = new Vector3(256, 4, 263);
 			$player = $this->getServer()->getPlayer($args[0]);
 $player->setImmobile();
-	 $player->teleport(Vector3 $pos, float $yaw = null, float $pitch = null);
+	 $player->teleport($pos);
 		    $config->set($player->getName(),true);
 		    $config->save();
 		    
@@ -53,13 +53,13 @@ $player->setImmobile();
 			$pos = new Vector3(255, 4, 255);
 		$config->set($player->getName(),false);
 			$player->setImmobile(false);
-	 $player->teleport(Vector3 $pos, float $yaw = null, float $pitch = null);
+	 $player->teleport($pos);
 		    $config->save();	
 			$sender->sendMessage("牢屋から出しました。");
 		}
 		}else{
 	
-		    $sender->sendMessage("§c使用方法:/atama 変更したい人の名前　変更後の名前");
+		    $sender->sendMessage("§c使用方法:/rouya ぶち込み・出したい人の名前");
 			}
 		
             }else{
