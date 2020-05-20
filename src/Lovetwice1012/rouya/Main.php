@@ -1,6 +1,6 @@
 <?php
 
-namespace Lovetwice1012\Renametug;
+namespace Lovetwice1012\rouya;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
